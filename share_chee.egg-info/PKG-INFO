@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: share-chee
+Version: 0.0.0
+Summary: share to share.snoot.club
+Home-page: https://git.snoot.club/chee/share
+Author: chee
+Author-email: chee@snoot.club
+License: UNKNOWN
+Description: * Share
+        
+        share files on share.snoot.club
+        
+Platform: UNKNOWN
+Requires-Python: >= 3.6
+Description-Content-Type: text/org

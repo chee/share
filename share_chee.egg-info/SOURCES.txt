@@ -1,0 +1,8 @@
+setup.py
+share/__init__.py
+share/__main__.py
+share/getseq.py
+share_chee.egg-info/PKG-INFO
+share_chee.egg-info/SOURCES.txt
+share_chee.egg-info/dependency_links.txt
+share_chee.egg-info/top_level.txt
