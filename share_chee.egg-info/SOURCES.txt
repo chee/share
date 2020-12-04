@@ -1,4 +1,5 @@
 setup.py
+share
 share/__init__.py
 share/__main__.py
 share/getseq.py

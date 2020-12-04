@@ -9,7 +9,6 @@ import os
 from slugify import slugify
 from .getseq import getseq
 
-
 def main():
 	parser = argparse.ArgumentParser()
 	parser.add_argument(
@@ -44,13 +43,22 @@ def main():
 	args = parser.parse_args()
 
 	mimetypes.init()
+	source = None
 
 	if args.file.startswith("/tmp/.psub") or args.file.startswith("/dev/fd"):
+		source = args.file
 		prefix = getseq()
 		head = open(args.file, "rb").read(2048)
 		ext = mimetypes.guess_extension(magic.from_buffer(head, True))
 		output_filename = f"{prefix}{ext}"
+	elif args.file.startswith("https://") or args.file.startswith("http://"):
+		source = f"/tmp/{getseq()}.html"
+		with open(source, "t+w") as file:
+			file.write(f"""<!doctype html><meta http-equiv="refresh" content="0;url={args.file}"><a href="{args.file}">{args.file}</a>""")
+
+		output_filename = "index.html"
 	else:
+		source = args.file
 		[name, ext] = os.path.splitext(os.path.basename(args.file))
 		output_filename = f"{slugify(name)}{ext}"
 
@@ -65,11 +73,14 @@ def main():
 		"-zL",
 		"--progress",
 		"--chmod=a+rw",
-		args.file,
+		source,
 		f"{ssh_target}:{destdir}/{output_filename}"
 	], stdout=PIPE)
 
-	print(f"{args.public_root}/{dirname}/{output_filename}")
+	output = f"{args.public_root}/{dirname}/"
+	if output_filename is not "index.html":
+		output += output_filename
+	print(output)
 
 
 if __name__ == "__main__":

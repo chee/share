@@ -5,7 +5,7 @@ with open("readme.org", "r") as fh:
 
 setuptools.setup(
 	name="share-snootclub",
-	version="0.0.0",
+	version="0.0.1",
 	author="chee",
 	author_email="chee@snoot.club",
 	description="share to share.snoot.club",
